@@ -1,5 +1,5 @@
 
-         Term::Activity - Process Activity Display Module - v 1.03
+         Term::Activity - Process Activity Display Module - v 1.04
 
 ================================================================================
 SYNOPSIS:
@@ -10,8 +10,8 @@ process is funinctioning over many iterations or outputs. It is instanced
 with an optional name and other configurable values and is then called on 
 each iterative loop.
 
-================================================================================MODULE 
-INSTALLATION
+================================================================================
+INSTALLATION:
 ================================================================================
 
 To install this module type the following:
@@ -73,6 +73,10 @@ You can either instance them as a scalar value:
 Or via a configuration hash reference:
 
   my $ta = new Term::Activity ({ label => 'Batch7' });
+
+Also, through the course of processing, you can change the label.
+
+         $ta->relabel("New Label");
 
 Skins:
 

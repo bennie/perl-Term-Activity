@@ -1,5 +1,10 @@
 Revision history for Perl extension Term::Activity.
 
+1.04  2004/03/25
+
+	Added the ability to relabel the display.
+	Improved algorithm for handling slowdowns in the rate of processing.
+
 1.03  2003/10/08
 
 	Fixed an 'overlap' bug that was due to the number field expanding 
