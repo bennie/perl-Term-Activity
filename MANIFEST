@@ -5,5 +5,7 @@ README
 lib/Term/Activity.pm
 t/01-load.t
 t/02-skins.t
+t/03-debug.t
+t/04-time.t
 
 META.yml                                 Module meta-data (added by MakeMaker)

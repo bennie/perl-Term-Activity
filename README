@@ -1,5 +1,5 @@
 
-         Term::Activity - Process Activity Display Module - v 1.05
+         Term::Activity - Process Activity Display Module - v 1.06
 
 ================================================================================
 SYNOPSIS:
@@ -94,6 +94,32 @@ different ones:
      chars => [ '-', '=', '%', '=', '-' ]
   });
 
+Start Time:
+
+The start time for the process timer is initialized when the 
+Term::Activity is created. Sometimes, with longer programs you want the 
+count to remain constant through several different forms of processing. 
+You can set the start time to a previous start time to do this.
+
+The parameter is called 'time' in the initilization hash:
+
+  my $start_time = time;
+
+  # Stuff happens
+
+  my $ta = new Term::Activity ({
+     time => $start_time
+  });
+
+Debug:
+
+By setting the debug parameter to 1 a very verbose debug output is
+produced along with the regular output to let you see settings have been
+selected and what computations are being performed.
+
+  my $ta = new Term::Activity ({
+     debug => 1
+  });
 
 Multiple Instances:
 
@@ -133,7 +159,7 @@ way, it is not informative. Remember to keep your label strings short.
 AUTHORSHIP:
 ================================================================================
 
-    Term::Activity v1.05 2004/04/02
+    Term::Activity v1.06 2004/09/10
 
     (c) 2003-2004, Phillip Pollard <bennie@cpan.org>
     Released under the Perl Artistic License
