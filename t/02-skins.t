@@ -6,7 +6,7 @@
 # change 'tests => 1' to 'tests => last_test_to_print';
 
 use Test;
-BEGIN { plan tests => 4 };
+BEGIN { plan tests => 5 };
 use Term::Activity;
 ok(1); # If we made it this far, we're ok.
 
@@ -27,7 +27,19 @@ $t = undef;
 
 ok(1);
 
-# Flat chars
+# Wave (my own chars)
+
+$t = new Term::Activity ({ skin => 'wave', chars => [['|','='],['|','-']] });
+
+for ( 0 .. 999 ) {
+  $t->tick;
+}
+
+$t = undef;	
+	
+ok(1);
+
+# Flat 
 
 $t = new Term::Activity ({ skin => 'flat' });
 
@@ -39,7 +51,7 @@ $t = undef;
 	
 ok(1);
 
-# Flat chars (my own)
+# Flat (my own chars)
 
 $t = new Term::Activity ({ skin => 'flat', chars => [qw/X Y Z/] });
 
@@ -50,5 +62,3 @@ for ( 0 .. 999 ) {
 $t = undef;	
 	
 ok(1);
-
-
