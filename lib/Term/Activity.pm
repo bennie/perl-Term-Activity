@@ -125,64 +125,65 @@ way, it is not informative. Remember to keep your label strings short.
 
 package Term::Activity;
 
-use 5.006;
+use 5.6.0;
 use strict;
 use warnings;
 
-our $VERSION = '1.01';
-
-eval {
-  require Term::Size;
-};
-
-if ($@) {
-  our $width = 80;
-  our $term = 0;
-} else {
-  import Term::Size;
-  our $width = Term::Size::chars(*STDOUT{IO});
-  our $term = 1;
-}
+our $VERSION = '1.02';
 
 sub new {
   my     $self = {};
   bless  $self;
 
-  our $marker   = 0;
-  our $skip     = our $width - 19;
+  ## basic settings
 
-  our $ants     = [ map { ' '; } ( 1 .. $skip ) ];
+  our $width = $self->_width_init; # Terminal width
+
+  our $start    = time;            # starting time
+  our $last     = $start;          # last update time
+
+  our $count    = 0;               # full count
+  our $interval = 100;             # how often to update the terminal
+
+  our $marker = 0; # starting position
+  our $skip   = $width - 19;                     # The area for the chars
+  our $ants   = [ map { ' '; } ( 1 .. $skip ) ]; # characters to display
+
+  ## configurables
+
+  our $chars   = undef;
+  our $name    = ''; # optional label name
+  my $raw_skin = 'wave';
 
   if ( UNIVERSAL::isa($_[1],'HASH') ) {
-    our $name   = $_[1]->{label} || '';
-    our $nl     = length $name;
-    my $skin	= $_[1]->{skin} || 'wave';
-    my $c       = $_[1]->{chars};
 
-    no warnings;
+    $chars    = $_[1]->{chars} if defined $_[1]->{chars};  
+    $name     = $_[1]->{label} if defined $_[1]->{label};
+    $raw_skin = 'flat' if lc($_[1]->{skin}) eq 'flat';
 
-    if ($skin eq 'flat') {
-      $self->_ants_basic_init($c);
-      *_ants = \&_ants_basic;
-    } else {
-      $self->_ants_wave_init($c);
-      *_ants = \&_ants_wave;
-    }
+  } elsif ( defined $_[1] and length $_[1] ) {
 
-  } else {
-    our $name   = $_[1] || "";
-    our $nl     = length $name;
-    $self->_ants_wave_init;
-    *_ants = \&_ants_wave;
+    $name = $_[1];
+
   }
 
-  our $count    = 0;
-  our $interval = 100;
+  $name =~ s/[\r\n]//g;
 
-  our $start    = time;
-  our $last     = $start;   
+  ## bootstrap
 
-  our $name     =~ s/[\r\n]//g;
+  our $name_length = length $name; # Length of optional name label
+
+  our $ants_method_init = '_ants_' . $raw_skin . '_init';
+  our $ants_method      = '_ants_' . $raw_skin;
+
+  $self->_debug("Intializing skin: $raw_skin ($ants_method)");
+  $self->$ants_method_init($chars);
+
+  $self->_debug("Starting count     : $count");
+  $self->_debug("Starting size      : $width");
+  $self->_debug("Starting interval  : $interval");
+  $self->_debug("Starting time      : $start");
+  $self->_debug("Starting last time : $last");
 
   return $self;
 }
@@ -197,26 +198,30 @@ sub DESTROY {
 
 sub tick {
   my $self = shift @_;
-  our $count++;
+  our ($count,$interval);
+
+  $count++;
+  $self->_debug("tick()  count: $count  interval: $interval");
+
   print STDERR "\n" if $count == 1;
-  return 0 if $count % our $interval;
+  return 0 if $count % $interval;
   return $self->_update;
 }
 
-sub _ants_basic_init {
+sub _ants_flat_init {
   my $self = shift @_;
   my $char = shift @_;
+  our $chars;
   if ( ref $char && scalar(@$char) > 1 ) {
-    our $chars = $char;
+    $chars = $char;
   } else {
-    our $chars = [ '.', '=', '~', '#', '^', '-' ];
+    $chars = [ '.', '=', '~', '#', '^', '-' ];
   }
 }
 
-sub _ants_basic {
-  no warnings 'uninitialized';
-
+sub _ants_flat {
   our ( $ants, $chars, $marker, $skip );
+
   if ($skip > $#$ants) {
     for my $i ( 0 .. $#$ants - $skip ) {
       unshift @$ants, $chars->[0];
@@ -236,9 +241,8 @@ sub _ants_basic {
 }
 
 sub _ants_wave {
-  no warnings 'uninitialized';
-
   our ( $ants, $chars, $marker, $skip );
+
   if ($skip > $#$ants) {
     for my $i ( 1 .. $#$ants - $skip) {
       unshift @$ants, $chars->[0]->[0];
@@ -262,10 +266,11 @@ sub _ants_wave {
 sub _ants_wave_init {
   my $self = shift @_;
   my $c = shift @_;
+  our $chars;
   if ($c) {
-    our $chars = $c;
+    $chars = $c;
   } else {
-    our $chars = [ [ '\\', '~' ], [ '/', '_' ] ];
+    $chars = [ [ '\\', '~' ], [ '/', '_' ] ];
   }
 }
 
@@ -279,43 +284,52 @@ sub _clock {
   return join ':', map { $self->_zedten($_); } ($hr,$min,$sec);
 }
 
-sub _pcount {
-  my $pretty = our $count;
-  1 while $pretty =~ s/(\d)(\d\d\d)(?!\d)/$1,$2/;
-  return $pretty;
+sub _commaify {
+  my $self = shift @_;
+  my $num  = shift @_;
+  1 while $num =~ s/(\d)(\d\d\d)(?!\d)/$1,$2/;
+  return $num;
 }
 
-sub _pinterval {
-  my $pretty = our $interval;
-  1 while $pretty =~ s/(\d)(\d\d\d)(?!\d)/$1,$2/;
-  return $pretty;
+sub _debug {
+  my $self = shift @_;
+  return unless $self->{debug};
+  print STDERR join( ' ', 'DEBUG:', @_ ) . "\n";
 }
 
 sub _update {
   my $self = shift @_;
-  our $name;
-  my $in = $self->_pinterval;
-  my $il = length $in;
-  my $ct = $self->_pcount;
-  my $cl = length $ct;
-  if (our $term) {
-    our $width = Term::Size::chars(*STDOUT{IO});
-  } else {
-    our $width = 80;
-  }
-  our $skip = our $width - 19 - $il - $cl - our $nl;
+  our ($ants_method,$count,$interval,$name,$skip,$width,$name_length);
+
+  $self->_debug('_update()');
+
+  my $o_interval        = $self->_commaify($interval);
+  my $o_interval_length = length $o_interval;
+  my $o_count           = $self->_commaify($count);
+  my $o_count_length    = length $o_count;
+
+  $self->_update_width;
+
+  $skip = $width - 19 - $o_interval_length - $o_count_length - $name_length;
+
   my $format;
   my $out;
-  if ($nl) {
-    $format = "\r\%s \%${il}s : [\%${skip}s] \%${cl}s \%${nl}s ";
-    $out = sprintf $format, $self->_clock, $in, $self->_ants, $ct, $name;
+
+  if ( $name_length ) {
+    $format = "\r\%s \%${o_interval_length}s : [\%${skip}s] \%${o_count_length}s \%${name_length}s ";
+    $out = sprintf $format, $self->_clock, $o_interval, $self->$ants_method, $o_count, $name;
   } else {
-    $skip++;
-    $format = "\r\%s \%${il}s : [\%${skip}s] \%${cl}s ";
-    $out = sprintf $format, $self->_clock, $in, $self->_ants, $ct;
+    $skip++; # Without the name, gobble up the extra space
+    $format = "\r\%s \%${o_interval_length}s : [\%${skip}s] \%${o_count_length}s ";
+    $out = sprintf $format, $self->_clock, $o_interval, $self->$ants_method, $o_count;
   }
+
   $self->_update_interval;
+
   $format = "\%-.${width}s";
+
+  $self->_debug("_update sprintf: $format\n$out");
+
   return print STDERR sprintf $format, $out;
 }
 
@@ -333,6 +347,30 @@ sub _update_interval {
   }
 
   $last = time;
+}
+
+sub _update_width {
+  my $self = shift @_;  
+  our $width = chars(*STDOUT{IO}) if our $use_term_size;
+}
+
+sub _width_init {
+  my $default = 80;
+  our $use_term_size = 0;
+
+  eval { require Term::Size };
+
+  return $default if $@;
+
+  import Term::Size 'chars';
+  my ( $cols, $rows ) = chars(*STDOUT{IO});
+
+  if ( $cols > 0 ) {
+    $use_term_size = 1;
+    return $cols;
+  }
+
+  return $default;
 }
 
 sub _zedten {

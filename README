@@ -1,5 +1,5 @@
 
-         Term::Activity - Process Activity Display Module - v 1.01
+         Term::Activity - Process Activity Display Module - v 1.02
 
 ================================================================================
 SYNOPSIS:
@@ -106,8 +106,6 @@ single program you will need to undefine the object and reinstance it:
 KNOWN ISSUES:
 ================================================================================
 
-Min size:
-
 Resizing the window during execution may cause the status bar to stop
 refreshing properly.
 
@@ -115,15 +113,6 @@ Is the window is too small to accomodate the time, label, count, and
 basic spacing (that is, there is less that 0 spaces for the activity to 
 be displayed) the effect, while being preety in a watching-the-car-wreck 
 way, it is not informative. Remember to keep your label strings short.
-
-Global hell:
-
-The goal is to reduce the amount of computations that occur on each pass 
-so that the display has minimal impact on actual processing. To that end a 
-symbol table rewrite is used to keep from having to dynamically catch the 
-selected skin on every tick(). Due to this, and the accompanying lack of 
-$self the code gets nigh unreadable and lots of global variables in the 
-mask of module-level 'our's abound. A better way shall be found.
 
 ================================================================================
 AUTHORSHIP:
