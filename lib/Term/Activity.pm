@@ -58,6 +58,10 @@ Or via a configuration hash reference:
 
   my $ta = new Term::Activity ({ label => 'Batch7' });
 
+Also, through the course of processing, you can change the label.
+
+  $ta->relabel("New Label");
+
 =head2 Skins:
 
 Skins can be selected via a configuration hash reference. Currently there 
@@ -129,7 +133,7 @@ use 5.6.0;
 use strict;
 use warnings;
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 sub new {
   my     $self = {};
@@ -194,6 +198,12 @@ sub DESTROY {
     $self->_update;
     print STDERR "\n";
   }
+}
+
+sub relabel {
+  our $name = $_[1];
+  our $name_length = length $name;
+  return $name_length;
 }
 
 sub tick {
@@ -340,9 +350,12 @@ sub _update_interval {
   our ($interval, $last);
   my $delta = $now - $last;
 
-  if ( $delta > 2 && $interval > 1 ) {
+  if ( $delta > 5 && $interval > $delta ) { # The query is way slow, adjust down
+    $interval = int($interval/$delta);
+    $interval = 1 unless $interval;
+  } elsif ( $delta > 2 && $interval > 1 ) { # The query is a little slow
     $interval--;
-  } elsif ( $delta < 1 ) {
+  } elsif ( $delta < 1 ) { # The query is fast
     $interval++;
   }
 
