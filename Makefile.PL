@@ -7,5 +7,5 @@ WriteMakefile(
     'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM => 'lib/Term/Activity.pm',
-       AUTHOR     => 'Phil Pollard <phil@crescendo.net>') : ()),
+       AUTHOR     => 'Phil Pollard <bennie@cpan.org>') : ()),
 );

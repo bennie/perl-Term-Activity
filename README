@@ -1,5 +1,5 @@
 
-         Term::Activity - Process Activity Display Module - v 1.02
+         Term::Activity - Process Activity Display Module - v 1.03
 
 ================================================================================
 SYNOPSIS:
@@ -9,6 +9,17 @@ This module is designed to produce informational STDERR output while a
 process is funinctioning over many iterations or outputs. It is instanced 
 with an optional name and other configurable values and is then called on 
 each iterative loop.
+
+================================================================================MODULE 
+INSTALLATION
+================================================================================
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
 
 ================================================================================
 DESCRIPTION:
@@ -118,7 +129,7 @@ way, it is not informative. Remember to keep your label strings short.
 AUTHORSHIP:
 ================================================================================
 
-  Phillip Pollard <phil@crescendo.net>
+  Phillip Pollard <bennie@cpan.org>
   Kristina Davis <krd@menagerie.tf>
 
   Derived from Util::Status 1.12 2003/09/08 18:05:26

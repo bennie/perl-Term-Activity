@@ -109,7 +109,7 @@ way, it is not informative. Remember to keep your label strings short.
 
 =head1 AUTHORSHIP:
 
-  Phillip Pollard <phil@crescendo.net>
+  Phillip Pollard <bennie@cpan.org>
   Kristina Davis <krd@menagerie.tf>
 
   Derived from Util::Status 1.12 2003/09/08 18:05:26
@@ -129,7 +129,7 @@ use 5.6.0;
 use strict;
 use warnings;
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 sub new {
   my     $self = {};
@@ -231,7 +231,7 @@ sub _ants_flat {
       pop @$ants;
     }
   }
-  if ( $marker == $skip ) {
+  if ( $marker >= $skip ) {
     push @$chars, shift @$chars;
     $marker = 0;
   } else {
@@ -252,7 +252,7 @@ sub _ants_wave {
       pop @$ants;
     }
   }
-  if ( $marker == $skip ) {
+  if ( $marker >= $skip ) {
     $ants->[$skip] = $chars->[0]->[1];
     push @$chars, shift @$chars;
     $marker = 0;
