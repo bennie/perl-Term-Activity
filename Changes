@@ -1,5 +1,11 @@
 Revision history for Perl extension Term::Activity.
 
+1.06  2004/09/10
+
+	Now you can provide your own start time.
+	Debug output is now offered as a configurable parameter.
+	Oops! The class implementation clobbered the input parameters.
+
 1.05  2004/04/02
 
 	Properly blessing into the class name.

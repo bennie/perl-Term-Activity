@@ -95,8 +95,15 @@ The parameter is called 'time' in the initilization hash:
      time => $start_time
   });
 
-=head2 Start Time:
+=head2 Debug:
 
+By setting the debug parameter to 1 a very verbose debug output is 
+produced along with the regular output to let you see settings have been 
+selected and what computations are being performed.
+
+  my $ta = new Term::Activity ({ 
+     debug => 1
+  });
 
 =head2 Multiple Instances:
 
@@ -142,7 +149,7 @@ way, it is not informative. Remember to keep your label strings short.
     Derived from Util::Status 1.12 2003/09/08
     With permission granted from Health Market Science, Inc.
 
-    Crescendo CVS tag: $Revision: 1.8 $
+    Internal Crescendo RCS tag: $Revision: 1.9 $
 
 =head1 SEE ALSO:
 
@@ -161,13 +168,14 @@ use warnings;
 our $VERSION = '1.06';
 
 sub new {
-  my $class = shift @_;
+  my $class = $_[0];
   my $self  = {};
   bless($self,$class);
 
   ## configurables
 
   our $chars   = undef;
+  our $debug   = 0;     # debug output
   our $name    = '';    # optional label name
   our $start   = time;  # starting time
 
@@ -176,6 +184,7 @@ sub new {
   if ( UNIVERSAL::isa($_[1],'HASH') ) {
 
     $chars    = $_[1]->{chars} if defined $_[1]->{chars};
+    $debug    = $_[1]->{debug} if defined $_[1]->{debug};
     $name     = $_[1]->{label} if defined $_[1]->{label};
     $start    = $_[1]->{time}  if defined $_[1]->{time};
     $raw_skin = 'flat' if lc($_[1]->{skin}) eq 'flat';
@@ -331,7 +340,7 @@ sub _commaify {
 
 sub _debug {
   my $self = shift @_;
-  return unless $self->{debug};
+  return unless our $debug > 0;
   print STDERR join( ' ', 'DEBUG:', @_ ) . "\n";
 }
 
