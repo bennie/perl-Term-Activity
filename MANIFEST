@@ -1,0 +1,8 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+lib/Term/Activity.pm
+t/01-load.t
+t/02-skins.t
+
