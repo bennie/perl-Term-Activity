@@ -1,5 +1,11 @@
 Revision history for Perl extension Term::Activity.
 
-0.01  Tue Sep  9 14:43:48 2003
+1.00  2003/09/18
+
+	Updated version number to reflect mature release status.
+	Added test for custom characters in 'flat' skin.
+	Included the correct README file.
+
+0.01  2003/09/09
 
 	Derived from HMS tool Util::Status (1.12 2003/09/08)

@@ -118,7 +118,6 @@ way, it is not informative. Remember to keep your label strings short.
 =head1 SEE ALSO:
 
   Term::ProgressBar
-  Term::Size
 
 =cut
 
@@ -130,7 +129,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '1.00';
 
 eval {
   require Term::Size;

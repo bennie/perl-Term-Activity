@@ -6,7 +6,7 @@
 # change 'tests => 1' to 'tests => last_test_to_print';
 
 use Test;
-BEGIN { plan tests => 3 };
+BEGIN { plan tests => 4 };
 use Term::Activity;
 ok(1); # If we made it this far, we're ok.
 
@@ -14,6 +14,8 @@ ok(1); # If we made it this far, we're ok.
 
 # Insert your test code below, the Test module is use()ed here so read
 # its man page ( perldoc Test ) for help writing this test script.
+
+# Wave
 
 my $t = new Term::Activity;
 
@@ -25,6 +27,8 @@ $t = undef;
 
 ok(1);
 
+# Flat chars
+
 $t = new Term::Activity ({ skin => 'flat' });
 
 for ( 0 .. 999 ) {
@@ -34,3 +38,17 @@ for ( 0 .. 999 ) {
 $t = undef;	
 	
 ok(1);
+
+# Flat chars (my own)
+
+$t = new Term::Activity ({ skin => 'flat', chars => [qw/X Y Z/] });
+
+for ( 0 .. 999 ) {
+  $t->tick;
+}
+
+$t = undef;	
+	
+ok(1);
+
+
