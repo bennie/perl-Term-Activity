@@ -1,5 +1,5 @@
 
-         Term::Activity - Process Activity Display Module - v 1.04
+         Term::Activity - Process Activity Display Module - v 1.05
 
 ================================================================================
 SYNOPSIS:
@@ -133,8 +133,13 @@ way, it is not informative. Remember to keep your label strings short.
 AUTHORSHIP:
 ================================================================================
 
-  Phillip Pollard <bennie@cpan.org>
-  Kristina Davis <krd@menagerie.tf>
+    Term::Activity v1.05 2004/04/02
 
-  Derived from Util::Status 1.12 2003/09/08 18:05:26
-  With permission granted from Health Market Science, Inc.
+    (c) 2003-2004, Phillip Pollard <bennie@cpan.org>
+    Released under the Perl Artistic License
+
+    Additional contributions by Kristina Davis <krd@menagerie.tf>
+
+    Derived from Util::Status 1.12 2003/09/08
+    With permission granted from Health Market Science, Inc.
+

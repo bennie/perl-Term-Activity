@@ -113,11 +113,15 @@ way, it is not informative. Remember to keep your label strings short.
 
 =head1 AUTHORSHIP:
 
-  Phillip Pollard <bennie@cpan.org>
-  Kristina Davis <krd@menagerie.tf>
+    Term::Activity v1.05 2004/04/02
 
-  Derived from Util::Status 1.12 2003/09/08 18:05:26
-  With permission granted from Health Market Science, Inc.
+    (c) 2003-2004, Phillip Pollard <bennie@cpan.org>
+    Released under the Perl Artistic License
+
+    Additional contributions by Kristina Davis <krd@menagerie.tf>
+
+    Derived from Util::Status 1.12 2003/09/08
+    With permission granted from Health Market Science, Inc.
 
 =head1 SEE ALSO:
 
@@ -133,11 +137,12 @@ use 5.6.0;
 use strict;
 use warnings;
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 
 sub new {
-  my     $self = {};
-  bless  $self;
+  my $class = shift @_;
+  my $self  = {};
+  bless($self,$class);
 
   ## basic settings
 
