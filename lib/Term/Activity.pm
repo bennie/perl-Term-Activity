@@ -149,7 +149,7 @@ way, it is not informative. Remember to keep your label strings short.
     Derived from Util::Status 1.12 2003/09/08
     With permission granted from Health Market Science, Inc.
 
-    Internal Crescendo RCS tag: $Revision: 1.9 $
+    Internal Crescendo RCS tag: $Revision: 1.10 $
 
 =head1 SEE ALSO:
 
@@ -187,7 +187,7 @@ sub new {
     $debug    = $_[1]->{debug} if defined $_[1]->{debug};
     $name     = $_[1]->{label} if defined $_[1]->{label};
     $start    = $_[1]->{time}  if defined $_[1]->{time};
-    $raw_skin = 'flat' if lc($_[1]->{skin}) eq 'flat';
+    $raw_skin = 'flat' if defined $_[1]->{skin} and lc($_[1]->{skin}) eq 'flat';
 
   } elsif ( defined $_[1] and length $_[1] ) {
 

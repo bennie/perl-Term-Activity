@@ -1,8 +1,6 @@
-use Test;
-BEGIN { plan tests => 3 };
-
 use Term::Activity;
-ok(1);
+use Test::Simple tests => 2;
+use strict;
 
 my $t = new Term::Activity ({ time => 100 });
 ok(1);
