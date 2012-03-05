@@ -7,6 +7,8 @@ VERSIONTAG  DATETAG
 
 	Correct initilization check for skinning parameters.
 
+	Version jump to match cvs archive.
+
 1.06  2004/09/10
 
 	Now you can provide your own start time.

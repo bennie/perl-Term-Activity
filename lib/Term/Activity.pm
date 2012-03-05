@@ -139,17 +139,15 @@ way, it is not informative. Remember to keep your label strings short.
 
 =head1 AUTHORSHIP:
 
-    Term::Activity v1.06 2004/09/10
+    Term::Activity vVERSIONTAG DATETAG
 
-    (c) 2003-2004, Phillip Pollard <bennie@cpan.org>
+    (c) 2003-YEARTAG, Phillip Pollard <bennie@cpan.org>
     Released under the Perl Artistic License
 
     Additional contributions by Kristina Davis <krd@menagerie.tf>
 
     Derived from Util::Status 1.12 2003/09/08
     With permission granted from Health Market Science, Inc.
-
-    Internal Crescendo RCS tag: $Revision: 1.10 $
 
 =head1 SEE ALSO:
 
@@ -165,7 +163,7 @@ use 5.6.0;
 use strict;
 use warnings;
 
-our $VERSION = '1.06';
+$Term::Activity::VERSION='VERSIONTAG';
 
 sub new {
   my $class = $_[0];
