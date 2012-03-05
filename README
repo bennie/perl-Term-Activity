@@ -1,5 +1,5 @@
 
-         Term::Activity - Process Activity Display Module - v 1.06
+         Term::Activity - Process Activity Display Module - vVERSIONTAG
 
 ================================================================================
 SYNOPSIS:
@@ -159,9 +159,9 @@ way, it is not informative. Remember to keep your label strings short.
 AUTHORSHIP:
 ================================================================================
 
-    Term::Activity v1.06 2004/09/10
+    Term::Activity vVERSIONTAG DATETAG
 
-    (c) 2003-2004, Phillip Pollard <bennie@cpan.org>
+    (c) 2003-YEARTAG, Phillip Pollard <bennie@cpan.org>
     Released under the Perl Artistic License
 
     Additional contributions by Kristina Davis <krd@menagerie.tf>
