@@ -1,5 +1,12 @@
 Revision history for Perl extension Term::Activity.
 
+VERSIONTAG  DATETAG
+
+	Tests updated to be compatible with perl 5.15. 
+	(Swapped to Test::Simple to avoid using future bareword "plan")
+
+	Correct initilization check for skinning parameters.
+
 1.06  2004/09/10
 
 	Now you can provide your own start time.
