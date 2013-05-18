@@ -2,7 +2,7 @@
 set -e
 
 MODULE='lib/Term/Activity.pm'
-VERSION=`cvs status $MODULE | grep Working | awk '{ print $3 }' | tr '.' ' ' | awk '{ printf "v%d.%02d", $1, $2 }'`
+VERSION=`git describe`
 DATE=`date '+%Y/%m/%d'`
 YEAR=`date '+%Y'`
 TARDIR="Term-Activity-$VERSION";
