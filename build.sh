@@ -2,8 +2,8 @@
 set -e
 
 MODULE='lib/Term/Activity.pm'
-VERSION=`git describe --long | tr '-' ' ' | awk '{ print $1 }'`
-BUILD=`git describe --long | tr '-' ' ' | awk '{ print $2 }'`
+VERSION=`./version.pl`
+BUILD=`./version.pl --build`
 DATE=`date '+%Y/%m/%d'`
 YEAR=`date '+%Y'`
 TARDIR="Term-Activity-$VERSION";
@@ -48,5 +48,7 @@ echo
 echo "Building the tar file."
 cd build && tar czvf $TARDIR.tar.gz $TARDIR
 echo
+
+git push
 
 echo DONE!
