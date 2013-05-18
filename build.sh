@@ -2,7 +2,8 @@
 set -e
 
 MODULE='lib/Term/Activity.pm'
-VERSION=`git describe`
+VERSION=`git describe --long | tr '-' ' ' | awk '{ print $1 }'`
+BUILD=`git describe --long | tr '-' ' ' | awk '{ print $2 }'`
 DATE=`date '+%Y/%m/%d'`
 YEAR=`date '+%Y'`
 TARDIR="Term-Activity-$VERSION";
@@ -10,6 +11,7 @@ TARDIR="Term-Activity-$VERSION";
 echo
 echo "Module  : $MODULE"
 echo "Version : $VERSION"
+echo "Build   : $BUILD"
 echo "Date    : $DATE"
 echo "Year    : $YEAR"
 echo "Tar Dir : $TARDIR"
@@ -33,6 +35,10 @@ echo
 
 echo "Updating version tags."
 find build -type f | xargs perl -p -i -e "s|VERSIONTAG|$VERSION|g" 
+echo
+
+echo "Updating build tags."
+find build -type f | xargs perl -p -i -e "s|BUILDTAG|$BUILD|g" 
 echo
 
 echo "Updating date tags."
