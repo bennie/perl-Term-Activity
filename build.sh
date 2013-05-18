@@ -1,7 +1,6 @@
 #!/bin/sh
 set -e
 
-MODULE='lib/Term/Activity.pm'
 VERSION=`./version.pl`
 BUILD=`./version.pl --build`
 DATE=`date '+%Y/%m/%d'`
@@ -9,7 +8,6 @@ YEAR=`date '+%Y'`
 TARDIR="Term-Activity-$VERSION";
 
 echo
-echo "Module  : $MODULE"
 echo "Version : $VERSION"
 echo "Build   : $BUILD"
 echo "Date    : $DATE"
