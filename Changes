@@ -1,6 +1,6 @@
 Revision history for Perl extension Term::Activity.
 
-VERSIONTAG  DATETAG
+VERSIONTAG  DATETAG  (Build: BUILDTAG)
 
 	Updaing core SCM to git.
 	Version now generated on release.
