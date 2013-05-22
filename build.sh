@@ -3,7 +3,7 @@ set -e
 
 VERSION=`./version.pl`
 BUILD=`./version.pl --build`
-DATE=`date '+%Y/%m/%d'`
+DATE=`date '+%Y/%m/%d'` 
 YEAR=`date '+%Y'`
 TARDIR="Term-Activity-$VERSION";
 
@@ -16,7 +16,7 @@ echo "Tar Dir : $TARDIR"
 echo
 
 if [ -d build ];
-  then echo "Cleaning Build directory:"; rm -rfv build; echo; 
+  then echo "Cleaning Build directory:"; rm -rfv build; echo;
 fi
 
 echo "Creating the build directory:"
@@ -28,19 +28,19 @@ rsync -av --files-from=MANIFEST ./ "build/$TARDIR/"
 echo
 
 echo "Updating date tags."
-find build -type f | xargs perl -p -i -e "s|DATETAG|$DATE|g" 
+find build -type f | xargs perl -p -i -e "s|DATETAG|$DATE|g"
 echo
 
 echo "Updating version tags."
-find build -type f | xargs perl -p -i -e "s|VERSIONTAG|$VERSION|g" 
+find build -type f | xargs perl -p -i -e "s|VERSIONTAG|$VERSION|g"
 echo
 
 echo "Updating build tags."
-find build -type f | xargs perl -p -i -e "s|BUILDTAG|$BUILD|g" 
+find build -type f | xargs perl -p -i -e "s|BUILDTAG|$BUILD|g"
 echo
 
 echo "Updating date tags."
-find build -type f | xargs perl -p -i -e "s|YEARTAG|$YEAR|g" 
+find build -type f | xargs perl -p -i -e "s|YEARTAG|$YEAR|g"
 echo
 
 echo "Building the tar file."
