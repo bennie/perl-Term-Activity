@@ -1,10 +1,12 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Term-Activity
-version:      1.05
-version_from: lib/Term/Activity.pm
+abstract:     VMware's Lab Manager public and private API
 installdirs:  site
+license:      perl
+name:         Term-Activity
+version:      VERSIONTAG
+version_from: lib/Term/Activity.pm
+
 requires:
+  Term::Size: 0
 
 distribution_type: module
 generated_by: ExtUtils::MakeMaker version 6.21
