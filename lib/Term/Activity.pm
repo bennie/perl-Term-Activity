@@ -94,6 +94,34 @@ The parameter is called 'time' in the initilization hash:
   my $ta = new Term::Activity ({ 
      time => $start_time
   });
+  
+=head2 Count:
+
+As with the time, you might want to start at a later count, so you can keep track of 
+total count across several runs.
+
+The parameter to change the starting count is called 'count' in the initialization hash:
+
+
+  my $ta = new Term::Activity ({ 
+     count => $start_count
+  });
+
+
+=head2 Interval:
+
+The interval is how often the screen is updated to reflect changes. By default, 
+Term::Activity auto-tunes this towards an update approximately each second.
+
+Initially, however, there is no way of knowing how often you will call tick(), so an 
+assumed interval of 100 iterations before update is the starting value.
+
+For slower processes, you probably want to start this at 1 - that is, a visual update at
+each call of tick()
+
+  my $ta = new Term::Activity ({ 
+     interval => 1
+  });
 
 =head2 Debug:
 
@@ -172,19 +200,24 @@ sub new {
 
   ## configurables
 
-  our $chars   = undef;
-  our $debug   = 0;     # debug output
-  our $name    = '';    # optional label name
-  our $start   = time;  # starting time
+  our $chars    = undef; # custom charset to use
+  our $count    = 0;     # full count
+  our $debug    = 0;     # debug output
+  our $interval = 100;   # how often to update the terminal
+  our $name     = '';    # optional label name
+  our $start    = time;  # starting time
+
 
   my $raw_skin = 'wave';
 
   if ( UNIVERSAL::isa($_[1],'HASH') ) {
 
-    $chars    = $_[1]->{chars} if defined $_[1]->{chars};
-    $debug    = $_[1]->{debug} if defined $_[1]->{debug};
-    $name     = $_[1]->{label} if defined $_[1]->{label};
-    $start    = $_[1]->{time}  if defined $_[1]->{time};
+    $chars    = $_[1]->{chars}    if defined $_[1]->{chars};
+    $count    = $_[1]->{count}    if defined $_[1]->{count};
+    $debug    = $_[1]->{debug}    if defined $_[1]->{debug};
+    $interval = $_[1]->{interval} if defined $_[1]->{interval};
+    $name     = $_[1]->{label}    if defined $_[1]->{label};
+    $start    = $_[1]->{time}     if defined $_[1]->{time};
     $raw_skin = 'flat' if defined $_[1]->{skin} and lc($_[1]->{skin}) eq 'flat';
 
   } elsif ( defined $_[1] and length $_[1] ) {
@@ -198,11 +231,7 @@ sub new {
   ## basic settings
 
   our $width = $self->_width_init; # Terminal width
-
-  our $last  = $start;          # last update time
-
-  our $count    = 0;               # full count
-  our $interval = 100;             # how often to update the terminal
+  our $last  = $start;             # last update time
 
   our $marker = 0; # starting position
   our $skip   = $width - 19;                     # The area for the chars

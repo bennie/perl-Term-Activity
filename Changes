@@ -3,15 +3,15 @@ Revision history for Perl extension Term::Activity.
 VERSIONTAG  DATETAG  (Build: BUILDTAG)
 
 	Updaing core SCM to git.
-	Version now generated on release.
-
+	Version numbers are now generated on release, not commits.
+	Added "interval" and "count" to options.
+	Added "Term::Size" as a prereq
+	
 1.11  2012/03/04
 
 	Tests updated to be compatible with perl 5.15. 
 	(Swapped to Test::Simple to avoid using future bareword "plan")
-
 	Correct initilization check for skinning parameters.
-
 	Version jump to match cvs archive.
 
 1.06  2004/09/10
