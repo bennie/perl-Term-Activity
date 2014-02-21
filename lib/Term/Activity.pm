@@ -1,15 +1,15 @@
-=head1 NAME:
+=head1 NAME
 
 Term::Activity - Process Activity Display Module
 
-=head1 SYNOPSIS:
+=head1 SYNOPSIS
 
 This module is designed to produce informational STDERR output while a 
 process is funinctioning over many iterations or outputs. It is instanced 
 with an optional name and other configurable values and is then called on 
 each iterative loop.
 
-=head1 DESCRIPTION:
+=head1 DESCRIPTION
 
 The information displayed is the current time processed (measured since 
 the instancing of the module), the number of actions second, a text-graphic 
@@ -34,7 +34,7 @@ Term::Activity can resize itself to the width of the current window if
 Term::Size is installed. If not, it defaults to an 80-character display.
 Term::Size is thouroughly reccomended.
 
-=head1 USAGE:
+=head1 USAGE
 
 =head2 Basic Usage:
 
@@ -155,7 +155,7 @@ single program you will need to undefine the object and reinstance it:
 
   (lather. rinse. repeat.)
 
-=head1 KNOWN ISSUES:
+=head1 KNOWN ISSUES
 
 Resizing the window during execution may cause the status bar to stop
 refreshing properly.
@@ -165,12 +165,27 @@ basic spacing (that is, there is less that 0 spaces for the activity to
 be displayed) the effect, while being preety in a watching-the-car-wreck 
 way, it is not informative. Remember to keep your label strings short.
 
-=head1 AUTHORSHIP:
+=head1 BUGS AND SOURCE
 
-    Term::Activity vVERSIONTAG DATETAG
+	Bug tracking for this module: https://rt.cpan.org/Ticket/Display.html?id=?????
+
+	Source hosting: http://www.github.com/bennie/perl-Term-Activity
+
+=head1 VERSION
+
+	Term::Activity vVERSIONTAG DATETAG
+
+=head1 COPYRIGHT
 
     (c) 2003-YEARTAG, Phillip Pollard <bennie@cpan.org>
-    Released under the Perl Artistic License
+
+=head1 LICENSE
+
+This source code is released under the "Perl Artistic License 2.0," the text of 
+which is included in the LICENSE file of this distribution. It may also be 
+reviewed here: http://opensource.org/licenses/artistic-license-2.0
+
+=head1 AUTHORSHIP
 
     Additional contributions by Kristina Davis <krd@menagerie.tf>
 
