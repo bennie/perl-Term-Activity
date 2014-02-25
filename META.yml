@@ -1,12 +1,35 @@
-abstract:     VMware's Lab Manager public and private API
-installdirs:  site
-license:      perl
-name:         Term-Activity
-version:      VERSIONTAG
-version_from: lib/Term/Activity.pm
-
+--- #YAML:1.0
+name:               Term-Activity
+version:            VERSIONTAG
+abstract:           VMware's Lab Manager public and private API
+author:
+    - Phil Pollard <bennie@cpan.org>
+license:            artistic_2
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
 requires:
-  Term::Size: 0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.21
+    perl:           5.008001
+    Term::Size:     0
+    Test::Simple:   0
+resources:
+    bugtracker:
+        web:  https://rt.cpan.org/Dist/Display.html?Name=Term-Activity
+    repository:
+        type:  git
+        url:   git://github.com/bennie/perl-Term-Activity.git
+        web:   http://github.com/bennie/perl-Term-Activity
+no_index:
+    directory:
+        - t
+        - inc
+provides:
+    Term::Activity:
+        file: lib/Term/Activity.pm
+        version: VERSIONTAG
+generated_by:       ExtUtils::MakeMaker version 6.56
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
