@@ -2,6 +2,10 @@ Revision history for Perl extension Term::Activity.
 
 VERSIONTAG  DATETAG
 
+	Now auto-building correct meta information
+
+1.15  2014/02/25
+
 	Updated meta information
 	Added LICENSE file to distribution
 
