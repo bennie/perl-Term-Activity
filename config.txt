@@ -8,6 +8,6 @@ $license = 'artistic_2';
 $abstract    = 'Process Activity Display Module';
 $description = $abstract;
 
-$perl_ver = '5.006';
+$perl_ver = '5.006001';
 
-%requires = ( 'Term::Size' => '0' );
+%requires = ( 'Term::Size' => '0', 'Test::Simple' => 0 );
