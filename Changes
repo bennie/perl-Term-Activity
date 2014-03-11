@@ -2,6 +2,10 @@ Revision history for Perl extension Term::Activity.
 
 VERSIONTAG  DATETAG
 
+	Adding a POD test
+
+1.16  2014/03/03
+
 	Now auto-building correct meta information
 
 1.15  2014/02/25
