@@ -3,7 +3,7 @@ LICENSE
 Makefile.PL
 MANIFEST
 META.json
-META.yaml
+META.yml
 README
 lib/Term/Activity.pm
 t/00-pod.t
