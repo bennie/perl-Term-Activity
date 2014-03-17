@@ -23,6 +23,7 @@ VERSIONTAG  DATETAG
 	Version numbers are now generated on release, not commits.
 	Added "interval" and "count" to options.
 	Added "Term::Size" as a prereq
+	META.yml now with correct version. (RT #76201)
 	
 1.11  2012/03/04
 
