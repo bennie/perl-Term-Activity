@@ -2,6 +2,11 @@ Revision history for Perl extension Term::Activity.
 
 VERSIONTAG  DATETAG
 
+	Using GNU TAR now. The previous release had PAX headers in the tar file.
+	Build scripts now automatically configure minium perl version.
+
+1.19  2014/03/27
+
 	Adding missing RT information to Changes
 
 1.18  2014/03/13
