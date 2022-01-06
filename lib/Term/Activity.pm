@@ -457,7 +457,7 @@ sub _width_init {
   import Term::Size 'chars';
   my ( $cols, $rows ) = chars(*STDOUT{IO});
 
-  if ( $cols > 0 ) {
+  if ( defined($cols) and $cols > 0 ) {
     $use_term_size = 1;
     return $cols;
   }
